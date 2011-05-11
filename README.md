@@ -23,11 +23,16 @@ Features
 Browsing The Source
 -------------------
 
-The application's models, views and controllers are in the "app" directory above. Additional objects include 
+The application's models, views and controllers are in the "app" directory above. Additional objects include:
+
 **Migrations**: These are essentially files which instantiate the database. There are initial migrations and transformation migrations. Transformation migrations indicate a change to the database. I've created all the migration in the applications so to take advantage of revision control features in the database. These files are located in "db/migrate" (The migrate folder under the db folder)
+
 **Fixtures**: These are definitions of initial testing data for the application. These are found in "test/fixtures"
+
 **Unit Tests**: These classes execute code from the application using the test data from the fixtures and ensures that the result matches expectations. These are located in "test/unit"
+
 **Functional Tests**: These classes execute code from the controllers in the application using the test data from the fixtures and ensures that the result matches expectations. These are located in "test/functional"
+
 **Rake Tasks**: These are procedures which perform application maintenance taks. These are mainly for test data generation. They are located in "lib/tasks"
 
 Why I should get an A
