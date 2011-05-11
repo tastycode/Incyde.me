@@ -1,5 +1,7 @@
 INCYDE.ME! The incyde source for social monetization
 ====================================================
+
+
 **Site**: 	[http://www.incyde.me] (http://www.incyde.me)
 **Author**:	Thomas W. Devol
 **Class**:	CIS 591
@@ -14,12 +16,20 @@ Incyde.me provides end-users the ability to record their personal thoughts which
 Features
 --------
 **1. End users can sign-up and post content to the site. A list of their posts is displayed.
+
 **2. Advertisers may create searches which show posts matching the contents of the search. They may create an Advertisement from their search which will then display to end-users any time a post is on the screen matching the associated search.
+
 **3. Advertisers may view a report of all the activity on each advertisement, the report will show impressions and clicks by day and is filterable by date.
+
 **4. Advertisers may export search results as CSV,PDF and XML.
+
 **5. Advertisers may manage their billing online and view their payment history.
+
 **5. Administrators may create new groups and permission keys beyond advertisers as the needs arise.
+
 **6. A user activity report is available showing the number of posts, signups and frequency analysis data of all the content posted on the site between the dates of the report.
+
+
 Browsing The Source
 -------------------
 
