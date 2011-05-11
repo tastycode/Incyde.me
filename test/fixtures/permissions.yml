@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+can_manage_users: 
+  key: can_manage_users
+  title: Can Manage Users
+  
+# column: value
+#
+can_export_search: 
+  key: can_export_search
+  title: Can Export Search Results 
+
+can_see_all_posts:
+  key: can_see_all_posts
+  title: Can see posts from other users
+#  column: value

@@ -1,0 +1,61 @@
+%h1 Advertisement Performance
+%h2= "["+h(@start_date.strftime("%m/%d/%y"))+" to "+h(@end_date.strftime("%m/%d/%y"))+"]"
+- semantic_form_for 'filters', :url=>performance_advert_path(@advert) do |form|
+  - form.inputs :name=>"Filters" do
+    = form.input :start_date , :label=>"Start Date", :input_html=>{:class=>:date,:value=>@start_date.strftime("%m/%d/%Y")}
+    = form.input :end_date   , :label=>"End Date", :input_html=>{:class=>:date,:value=>@end_date.strftime("%m/%d/%Y")}
+  - form.buttons do
+    = form.commit_button :label=>"Filter"
+:javascript
+  $(function() {
+    new Highcharts.Chart({
+      chart: { renderTo: "active_graph" },
+      title: { text: "Activity by day" },
+      xAxis: { type: "datetime" },
+      yAxis: { title: { text: "Total"} },
+      series: [
+        {
+          name: "Impressions",
+          pointInterval: #{1.day*1000},
+          pointStart: #{@start_date.to_datetime.to_i*1000},
+          data: #{@graph_data['impressions'].to_json} 
+        },
+        {
+          name: "Clicks",
+          pointInterval: #{1.day*1000},
+          pointStart: #{@start_date.to_datetime.to_i*1000},
+          data: #{@graph_data['clicks'].to_json}
+        }
+      ]
+    });
+  });
+#active_graph
+  (Graph)
+%dl.report
+  %dt Impressions
+  %dd= @report_data['totals']['impressions']
+  %dt Clicks
+  %dd= @report_data['totals']['clicks']
+  %dt Conversion
+  %dd= sprintf("%.2f",@report_data['totals']['conversion'].to_f)+"%"
+  %dt Impressions/Day
+  %dd= sprintf("%.2f",@report_data['totals']['impressions_day'].to_f)
+  %dt Clicks/Day
+  %dd= sprintf("%.2f",@report_data['totals']['clicks_day'].to_f)
+%br{:style=>"clear:both"}/
+%table
+  %thead
+    %tr
+      %th Day
+      %th Impressions
+      %th Clicks
+      %th Conversion
+  %tbody
+    - @start_date.to_date.upto(@end_date.to_date) do |day|
+      %tr
+        %th= day.to_s
+        %td= (impressions=@report_data['series']['merge'][day.to_s]['impressions'] rescue 0)
+        %td= (clicks=@report_data['series']['merge'][day.to_s]['clicks'] rescue 0)
+        %td= sprintf("%.2f",(clicks.to_f/impressions.to_f) * 100)+"%" rescue ""
+
+  

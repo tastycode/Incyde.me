@@ -1,0 +1,28 @@
+%h1 Groups
+= link_to "Add Group", new_group_path
+- if @groups.length == 0
+  No groups found
+- else
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Key
+        %th Title
+        %th &nbsp;
+    %tbody
+      - @groups.each do |group|
+        %tr
+          %th= group.id
+          %td= group.key
+          %td= group.title
+          %td
+            = link_to "Users(#{group.users.count})", group_users_path(group),{:icon=>"users"}
+            %br/
+            = link_to "Permissions(#{group.permissions.count})", group_permissions_path(group),{:icon=>"lock--pencil"}
+            %br/
+            = link_to "Edit", edit_group_path(group), {:icon=>"pencil"}
+            %br/
+            = link_to "Delete", group_path(group),{:confirm=>"Are you sure you want to delete this group?", :method=>:delete,:icon=>"cross"}
+
+

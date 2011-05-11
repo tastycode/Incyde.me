@@ -1,0 +1,25 @@
+%h1 Searches
+= link_to "New Search", new_search_path, {:icon=>"magnifier--plus"}
+- if @searches.length==0
+  No searches found
+- else
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Date
+        %th Query
+        %th &nbsp;
+    %tbody
+      - @searches.each do |search|
+        %tr
+          %th= link_to search.id, search_path(search)
+          %td= search.created_at
+          %td= h search.query
+          %td
+            = link_to "View/Update", search_path(search), {:icon=>"magnifier-zoom-fit"}
+            %br/
+            = link_to "Add Advertisement", new_advert_path("advert[search_id]"=>search.id),{:icon=>"zone--plus"}
+            %br/
+            = link_to "Delete", search_path(search),{:method=>:delete,:icon=>"magnifier--minus"}
+            

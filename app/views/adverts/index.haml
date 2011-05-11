@@ -1,0 +1,35 @@
+%h1 Advertisements
+= link_to "New Advertisement", new_advert_path,{:icon=>"plus"}
+- if @adverts.length ==0 
+  No adverts found
+- else
+  %table
+    %thead
+      %tr
+        %th Search Query
+        %th Ad
+        %th Created 
+        %th
+          Impressions
+          %br/
+          %b Clicks
+        %th &nbsp;
+    %tbody
+      - @adverts.each do |advert|
+        %tr
+          %td= advert.search.query
+          %td
+            %b= advert.title
+            %p= advert.body 
+          %td= advert.created_at.strftime("%m/%d/%y")
+          %td
+            = advert.impressions.count
+            %br/
+            %b= advert.clicks.count
+          %td 
+            = link_to "Performance" , performance_advert_path(advert), {:icon=>"chart-up"}
+            %br/
+            = link_to "Edit"        , edit_advert_path(advert),{:icon=>"zone--pencil"}
+            %br/
+            = link_to "Delete"      , advert_path(advert) , {:method=>:delete,:icon=>"zone--minus"}
+

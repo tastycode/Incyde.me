@@ -1,0 +1,19 @@
+%h1 Payment Events
+- if @payment_events.length == 0
+  No billing history to display
+- else 
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Date
+        %th Type
+        %th Amount
+    %tbody
+      - @payment_events.each do |event| 
+        %tr
+          %th= event.id
+          %td= event.created_at
+          %td= event.etype
+          %td= event.amount
+

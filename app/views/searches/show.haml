@@ -1,0 +1,26 @@
+%h1 Search Results for '#{@search.query}'
+
+- semantic_form_for @search do |form|
+  - form.inputs do
+    = form.input :query
+  = form.buttons
+= link_to "Create Advertisement For This Search", new_advert_path("advert[search_id]"=>@search.id),{:icon=>"zone--plus"}
+%br/
+- if @posts.length == 0
+  No posts found
+- else
+  .grid_13
+    - @posts.each do |post|
+      .post.grid_12
+        %p.post_content= post.content 
+        %p.post_data
+          %i= time_ago_in_words(post.created_at)+" ago"
+          by
+          %b= post.user
+        %br{:style=>'clear:both'}/
+  - if current_user.can?("can_export_search")
+    Export as
+    = link_to "CSV", url_for(:action=>:show,:format=>:csv,:id=>@search.id)
+    = link_to "XML", url_for(:action=>:show,:format=>:xml,:id=>@search.id)
+    = link_to "JSON", url_for(:action=>:show,:format=>:json,:id=>@search.id)
+

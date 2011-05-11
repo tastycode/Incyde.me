@@ -1,0 +1,6 @@
+- unless @posts.length == 0 
+  = @posts[0].attributes.keys.to_csv
+  - @posts.each do |post|
+    = post.attributes.values.to_csv
+
+  

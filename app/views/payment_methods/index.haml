@@ -1,0 +1,22 @@
+%h1 Payment Methods
+=link_to "New", new_payment_method_path,{:icon=>"plus"}
+%table
+  %thead
+    %tr
+      %th ID
+      %th Card Number
+      %th Expires 
+      %th Created
+      %th &nbsp;
+  %tbody
+    - @payment_methods.each do |payment_method|
+      %tr
+        %td=payment_method.id
+        %td=payment_method.hashed_card_number
+        %td=payment_method.expires_at.to_s("%m/%y") rescue ""
+        %td=payment_method.created_at
+        %td
+          =link_to "Edit", edit_payment_method_path(payment_method), {:icon=>"credit-card--pencil"}
+          %br/
+          =link_to "Delete", payment_method_path(payment_method),{:method=>:delete,:icon=>"credit-card--minus"}
+=link_to "Billing History", payment_events_path,{:icon=>"alarm-clock"}

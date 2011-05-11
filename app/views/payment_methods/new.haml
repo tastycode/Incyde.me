@@ -1,0 +1,7 @@
+%h1 Add Payment Method
+- semantic_form_for @payment_method do |form|
+  - form.inputs do 
+    = form.input :card_number
+    = form.input :expires_at
+  = form.buttons
+

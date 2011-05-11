@@ -1,0 +1,56 @@
+%h1 Site Activity Report
+%h2= "["+h(@start_date.strftime("%m/%d/%y"))+" to "+h(@end_date.strftime("%m/%d/%y"))+"]"
+- semantic_form_for 'filters', :url=>activity_users_path do |form|
+  - form.inputs :name=>"Filters" do
+    = form.input :start_date , :label=>"Start Date", :input_html=>{:class=>:date,:value=>@start_date.strftime("%m/%d/%Y")}
+    = form.input :end_date   , :label=>"End Date", :input_html=>{:class=>:date,:value=>@end_date.strftime("%m/%d/%Y")}
+  - form.buttons do
+    = form.commit_button :label=>"Filter"
+:javascript
+  $(function() {
+    new Highcharts.Chart({
+      chart: { renderTo: "active_graph" },
+      title: { text: "Activity by day" },
+      xAxis: { type: "datetime" },
+      yAxis: { title: { text: "Total"} },
+      series: [
+        {
+          name: "Posts",
+          pointInterval: #{1.day*1000},
+          pointStart: #{@start_date.to_datetime.to_i*1000},
+          data: #{@graph_data['posts'].to_json} 
+        }
+      ]
+    });
+  });
+#active_graph
+  (Graph)
+%dl.report
+  %dt Signups
+  %dd= @report_data['totals']['signups']
+  %dt Posts
+  %dd= @report_data['totals']['posts']
+  %dt Signups/Day
+  %dd= sprintf("%.2f",@report_data['totals']['signups_day'].to_f)
+  %dt Posts/Day
+  %dd= sprintf("%.2f",@report_data['totals']['posts_day'].to_f)
+%br{:style=>"clear:both"}
+%h3 Word Frequencies
+#word_frequencies
+  - @report_data['series']['frequencies'].each do |obj|
+    %span{:style=>"font-size: "+(obj['total']*0.15).to_s+"em",:title=>(obj['total'].to_s+" posts")}=obj['word']
+%table
+  %thead
+    %tr
+      %th Word
+      %th Frequency
+  %tbody
+    - @report_data['series']['frequencies'].each do |obj|
+      %tr
+        %td= obj['word']
+        %td= obj['total']
+  
+
+
+      
+      

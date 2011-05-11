@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+pe_pmj_one: 
+  etype: SUCCESS
+  amount: 29.99
+  payment_method: payment_method_jacob
+  user: jacob 
+pe_pmj_two:
+  etype: DECLINE
+  amount: 29.99
+  payment_method: payment_method_steve 
+  user: steve 

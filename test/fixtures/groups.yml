@@ -1,0 +1,28 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+business_users:
+  key: business_users
+  title: Business Users
+  users: [jacob]
+
+#  permissions: [can_export_search]
+#  users: [marcus]
+
+advertisers:
+  key: advertisers
+  title: Advertisers
+  users: [jacob]
+
+#  permissions: [can_export_search]
+
+
+admins:
+  key: admins
+  title: Administrators
+  users: [steve]
+
+

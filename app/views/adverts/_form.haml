@@ -1,0 +1,8 @@
+
+- semantic_form_for @advert do |form|
+  - form.inputs do
+    = form.input :search, :as=>:select, :collection=>current_user.searches, :hint=>"Choose the search whose results you would like your ad to appear in"
+    = form.input :title, :input_html=>{:size=>20,:maxlength=>32}
+    = form.input :body, :as=>:text, :input_html => {:cols=>30,:rows=>3,:maxlength=>140}
+    = form.input :url
+  = form.buttons

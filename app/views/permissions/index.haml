@@ -1,0 +1,36 @@
+%h1 Permissions
+- unless params[:group_id].nil?
+  %h2 (For group: #{Group.find(params[:group_id]).title}) 
+  = link_to "See all permissions", permissions_path
+- else
+  = link_to "Add Permission", new_permission_path
+- if @permissions.length == 0
+  No permissions found
+- else
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Key
+        %th Title
+        %th &nbsp;
+    %tbody
+      - @permissions.each do |permission|
+        %tr
+          %th= permission.id
+          %td= permission.key
+          %td= permission.title
+          %td 
+            = link_to "Edit", edit_permission_path(permission),{:method=>"lock",:icon=>"lock--pencil"}
+            %br/
+            = link_to "Delete", permission_path(permission),{:method=>:delete,:confirm=>"This will DELETE this permission, are you sure?",:icon=>"cross"}
+            %br/
+            - unless params[:group_id].nil?
+              = link_to "Remove", remove_permission_group_path(:id=>params[:group_id],:permission_id=>permission.id), :method=>:delete,:icon=>"minus", :permission_id=>permission.id
+- unless params[:group_id].nil?
+  %h2 Add Permission
+  = form_tag(add_permission_group_path(params[:group_id]),:method=>:post) do
+    = label_tag(:permission_id, "Permission")
+    - #Find all permissions who are not in this groups permissions and map to select options
+    = select_tag(:permission_id, options_for_select((Permission.all-Group.find(params[:group_id]).permissions).collect{|permission| [permission.title,permission.id]}))
+    = submit_tag("Add")

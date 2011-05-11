@@ -1,0 +1,6 @@
+%h1 Edit Group
+- semantic_form_for @group do |form|
+  = form.inputs
+  = form.buttons
+= link_to "Users(#{@group.users.count})", group_users_path(@group) 
+= link_to "Permissions(#{@group.permissions.count})", group_permissions_path(@group)

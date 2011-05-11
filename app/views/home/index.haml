@@ -1,0 +1,42 @@
+- if user_signed_in?
+  = form_for :post, @post, :url=>posts_path, :html=>{:class=>'grid_13'} do |f|
+    = f.text_area :content, :size=>'40x3', :html=>{:style=>"padding:1.5em"}
+    = submit_tag "Post"
+  .grid_13
+    .grid_9.posts
+      - @posts.each do |post|
+        .post
+          %p.grid_9.post_content= post.content 
+          %p.grid_9.post_data
+            %i=time_ago_in_words(post.created_at)+" ago"
+          -# %br{:style=>'clear:both'}/
+    .grid_3
+      - @adverts.each do |advert|
+        .advert
+          %a{:href=>click_advert_path(advert),:target=>"_blank"}= advert.title
+          %p= advert.body
+- else
+  
+  %img{:src=>"/images/home_attention.jpg",:border=>"0"}/
+  .grid_16
+    .grid_6.push_1
+      %br/
+      %br/
+      %br/
+      %p.bigger_copy
+        Welcome to incyde.me. Incyde.me is a service that allows you to keep track of your ideas, thoughts and feelings.
+      %br/
+      %br/
+      %br/
+    .grid_6.push_2
+      %br/
+      %br/
+      %h2 Why care?
+      %ul
+        %li Because!
+  
+    
+    
+
+  
+

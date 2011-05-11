@@ -1,0 +1,26 @@
+
+admins_can_manage_users:
+  group: admins
+  permission: can_manage_users
+  enabled: true
+
+business_users_can_export_search:
+  group: business_users
+  permission: can_export_search
+  enabled: true
+
+ 
+admins_can_see_all_posts:
+  group: admins
+  permission: can_see_all_posts
+  enabled: true
+
+advertisers_can_see_all_posts:
+  group: advertisers
+  permission: can_see_all_posts
+  enabled: true
+
+business_users_can_see_all_posts:
+  group: business_users
+  permission: can_see_all_posts
+  enabled: true

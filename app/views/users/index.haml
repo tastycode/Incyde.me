@@ -1,0 +1,32 @@
+%h1 Users
+- unless params[:group_id].nil?
+  %h2 (For group: #{Group.find(params[:group_id]).title})
+- if @users.length == 0
+  No users found
+- else
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Email
+        %th Joined
+        %th Last Login
+        - unless params[:group_id].nil?
+          %th 
+    %tbody
+      - @users.each do |user|
+        %tr
+          %th= user.id
+          %td= user.email
+          %td= user.created_at
+          %td= user.last_sign_in_at
+          - unless params[:group_id].nil?
+            %td
+              = link_to "Remove", remove_user_group_path(:id=>params[:group_id],:user_id=>user.id), {:icon=>"minus",:method=>:delete}
+- unless params[:group_id].nil?
+  %h2 Add User 
+  = form_tag(add_user_group_path(params[:group_id]),:method=>:post) do
+    = label_tag(:user_id, "User")
+    - #Find all users who are not in this groups users and map to select options
+    = select_tag(:user_id, options_for_select((User.all-Group.find(params[:group_id]).users).collect{|user| [user.email,user.id]}))
+    = submit_tag("Add")

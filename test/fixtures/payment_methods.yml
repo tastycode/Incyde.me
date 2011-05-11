@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+payment_method_jacob: 
+  card_number: 4019281230192
+  expires_at: <%=Time.now%>
+  user: jacob 
+
+payment_method_steve:
+  card_number: 40192121239128
+  expires_at: <%=Time.now%>
+  user: steve
+# column: value
